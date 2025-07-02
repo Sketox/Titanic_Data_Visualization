@@ -67,8 +67,9 @@ df = df.drop_duplicates(subset=columns_to_check)
 # 5. Verificar y corregir inconsistencias en 'Sex' según título
 # -----------------------------------------------
 
-# Extraer título desde LastName (ej: "Mr", "Mrs", etc.)
-df["Title"] = df["LastName"].str.extract(r"^(Mr|Mrs|Miss|Master|Ms|Dr)\.?")
+# Extraer título desde Name (ej: "Mr", "Mrs", etc.)
+df["Title"] = df["Name"].str.extract(r",\s*(Mr|Mrs|Miss|Master|Ms|Dr)\.?\s")
+
 
 # Detectar conflictos entre título y sexo
 inconsistent_sex = df[
@@ -103,13 +104,13 @@ df_no_outliers_fare = remove_outliers_iqr(df, "Fare")
 
 def clasificar_edad(edad):
     if edad < 18:
-        return "Menor"
+        return "Minor"
     elif edad < 60:
-        return "Adulto"
+        return "Adult"
     else:
-        return "Tercera Edad"
+        return "Senior"
 
-df["GrupoEdad"] = df["Age"].apply(clasificar_edad)
+df["AgeGroup"] = df["Age"].apply(clasificar_edad)
 
 
 # -----------------------------------------------
@@ -125,73 +126,6 @@ print(survival_by_class.round(2))
 cross_tab = pd.crosstab(df["Pclass"], df["Survived"], margins=True)
 print("\n📋 Tabla cruzada de supervivencia por clase:")
 print(cross_tab)
-
-# -----------------------------------------------
-# 8. Visualizaciones 
-# -----------------------------------------------
-
-# Configuración de estilo
-plt.style.use("dark_background")
-sns.set_palette("pastel")  
-
-# Boxplot: Edad antes y después de eliminar outliers
-plt.figure(figsize=(12, 5))
-plt.subplot(1, 2, 1)
-sns.boxplot(x=df["Age"])
-plt.title("Edad - Antes de eliminar outliers")
-plt.subplot(1, 2, 2)
-sns.boxplot(x=df_no_outliers_age["Age"])
-plt.title("Edad - Después de eliminar outliers")
-plt.tight_layout()
-plt.savefig("images/age_before_after.png")
-plt.show()
-
-# Boxplot: Fare antes y después
-plt.figure(figsize=(12, 5))
-plt.subplot(1, 2, 1)
-sns.boxplot(x=df["Fare"])
-plt.title("Fare - Antes de eliminar outliers")
-plt.subplot(1, 2, 2)
-sns.boxplot(x=df_no_outliers_fare["Fare"])
-plt.title("Fare - Después de eliminar outliers")
-plt.tight_layout()
-plt.savefig("images/fare_before_after.png")
-plt.show()
-
-# Countplot: Clase por puerto de embarque
-sns.countplot(x="Embarked", hue="Pclass", data=df)
-plt.title("Distribución de Clase por Puerto de Embarque")
-plt.savefig("images/class_by_port.png")
-plt.show()
-
-# Barplot: Tasa de supervivencia por clase
-sns.barplot(x="Pclass", y="Survived", data=df, ci=None)
-plt.title("Tasa de Supervivencia por Clase")
-plt.xlabel("Clase del Pasajero (Pclass)")
-plt.ylabel("Tasa de Supervivencia")
-plt.ylim(0, 1)
-plt.savefig("images/survival_by_class.png")
-plt.show()
-
-# Countplot: Distribución de pasajeros por grupo de edad
-sns.countplot(x="GrupoEdad", data=df, order=["Menor", "Adulto", "Tercera Edad"])
-plt.title("Distribución de Pasajeros por Grupo de Edad")
-plt.xlabel("Grupo de Edad")
-plt.ylabel("Cantidad de Pasajeros")
-plt.savefig("images/age_group_distribution.png")
-plt.show()
-
-# Countplot: Supervivencia por grupo de edad
-sns.countplot(x="GrupoEdad", hue="Survived", data=df, order=["Menor", "Adulto", "Tercera Edad"])
-plt.title("Supervivencia por Grupo de Edad")
-plt.xlabel("Grupo de Edad")
-plt.ylabel("Cantidad de Pasajeros")
-plt.legend(title="¿Sobrevivió?", labels=["No", "Sí"])
-plt.savefig("images/survival_by_age_group.png")
-plt.show()
-
-
-
 
 # -----------------------------------------------
 # ✅ Fin del proceso
