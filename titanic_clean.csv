@@ -1,0 +1,19 @@
+PassengerId,Name,LastName,Age,Sex,Pclass,Fare,Embarked,Survived,Title,GrupoEdad
+1,Braund,Mr. Owen Harris,22.0,male,3,7.25,S,0,Mr,Adulto
+2,Cumings,Mrs. John Bradley (Florence Briggs Thayer),38.0,male,1,71.2833,C,1,Mr,Adulto
+3,Heikkinen,Miss. Laina,26.0,female,3,7.925,S,1,Miss,Adulto
+4,Futrelle,Mrs. Jacques Heath (Lily May Peel),35.0,male,1,53.1,S,1,Mr,Adulto
+5,Allen,Mr. William Henry,35.0,male,3,8.05,S,0,Mr,Adulto
+6,Moran,Mr. James,23.5,male,3,0.0,S,0,Mr,Adulto
+7,McCarthy,Mr. Timothy,54.0,male,1,51.8625,S,0,Mr,Adulto
+8,Palsson,Master. Gosta Leonard,2.0,male,3,21.075,S,0,Master,Menor
+9,Johnson,Mrs. Oscar W (Elisabeth Vilhelmina Berg),27.0,male,3,11.1333,S,1,Mr,Adulto
+10,Nasser,Mrs. Nicholas (Adele Achem),14.0,male,2,30.0708,C,1,Mr,Menor
+12,Sandstrom,Miss. Marguerite Rut,43.666666666666664,female,1,125.10416666666667,C,1,Miss,Adulto
+13,Bonnell,Miss. Elizabeth,58.0,female,1,26.55,S,1,Miss,Adulto
+14,Sloper,Mr. William Thompson,28.0,male,1,35.5,S,1,Mr,Adulto
+15,Asimov,Mr. Isaac,999.0,male,2,99.99,C,1,Mr,Tercera Edad
+16,Williams,Mr. Charles,35.0,male,3,7.75,S,0,Mr,Adulto
+17,Andersson,Miss. Erna Alexandra,17.0,female,3,7.775,S,0,Miss,Menor
+19,Beesley,Mr. Lawrence,34.0,male,2,53.377199999999995,C,1,Mr,Adulto
+20,Carter,Mr. William Ernest,41.0,male,1,512.3292,C,1,Mr,Adulto
